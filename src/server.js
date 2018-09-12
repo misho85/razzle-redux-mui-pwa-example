@@ -14,6 +14,7 @@ import {
   MuiThemeProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
+import 'isomorphic-fetch';
 import { dom as fontawesomeDom } from '@fortawesome/fontawesome-svg-core';
 import theme from './common/utils/theme';
 
@@ -48,20 +49,20 @@ server
       const context = {};
       // Render the component to a string
       const markup = renderToString(
-        <Provider store={store}>
-          <JssProvider
-            registry={sheetsRegistry}
-            generateClassName={generateClassName}
-          >
-            <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+        <JssProvider
+          registry={sheetsRegistry}
+          generateClassName={generateClassName}
+        >
+          <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+            <Provider store={store}>
               <HelmetProvider context={helmetContext}>
                 <StaticRouter context={context} location={req.url}>
                   <App />
                 </StaticRouter>
               </HelmetProvider>
-            </MuiThemeProvider>
-          </JssProvider>
-        </Provider>
+            </Provider>
+          </MuiThemeProvider>
+        </JssProvider>
       );
 
       const { helmet } = helmetContext;
@@ -73,7 +74,7 @@ server
         res.redirect(context.url);
       } else {
         res.status(200).send(
-          `<!DOCTYPE html>
+          `<!doctype html>
       <html ${helmet.htmlAttributes.toString()}>
       <head>
           ${helmet.title.toString()}
