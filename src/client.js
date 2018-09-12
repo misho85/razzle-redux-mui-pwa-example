@@ -14,7 +14,6 @@ import App from './common/App';
 
 // This is needed in order to deduplicate the injection of CSS in the page.
 const sheetsManager = new WeakMap();
-
 // Create a new class name generator.
 const generateClassName = createGenerateClassName();
 
