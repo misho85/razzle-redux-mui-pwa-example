@@ -85,6 +85,7 @@ server
               ? `<link rel="stylesheet" href="${assets.client.css}">`
               : ''
           }
+          ${css ? `<style id='jss-server-side'>${css}</style>` : ''}
           ${
             process.env.NODE_ENV === 'production'
               ? `<script src="${assets.client.js}" defer></script>`
