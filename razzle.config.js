@@ -17,9 +17,8 @@ const manifestConfig = {
   background_color: '#000000',
   icons: [
     {
-      src: require.resolve(path.join(__dirname, 'public', 'icon.png')),
-      sizes: '512x512',
-      type: 'image/png'
+      src: path.resolve('public/icon.png'),
+      sizes: [96, 128, 192, 256, 384, 512]
     }
   ]
 };
