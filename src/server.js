@@ -96,7 +96,14 @@ server
       <body ${helmet.bodyAttributes.toString()}>
           <div id="root">${markup}</div>
           <script>
-            window.__PRELOADED_STATE__ = ${serialize(finalState)}
+              window.__PRELOADED_STATE__ = ${serialize(finalState)}
+          </script>
+          <script>
+              if ('serviceWorker' in navigator) {
+                  window.addEventListener('load', function() {
+                      navigator.serviceWorker.register('/service-worker.js');
+                  });
+              }
           </script>
       </body>
       </html>`
