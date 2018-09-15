@@ -98,13 +98,17 @@ server
           <script>
               window.__PRELOADED_STATE__ = ${serialize(finalState)}
           </script>
-          <script>
-              if ('serviceWorker' in navigator) {
-                  window.addEventListener('load', function() {
-                      navigator.serviceWorker.register('/service-worker.js');
-                  });
-              }
-          </script>
+          ${
+            process.env.NODE_ENV === 'production'
+              ? `<script>
+                    if ('serviceWorker' in navigator) {
+                        window.addEventListener('load', function() {
+                            navigator.serviceWorker.register('/service-worker.js');
+                        });
+                    }
+                </script>`
+              : ''
+          }
       </body>
       </html>`
         );
