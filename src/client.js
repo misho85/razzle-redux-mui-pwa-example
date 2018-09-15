@@ -28,7 +28,7 @@ class Client extends Component {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/sw.js')
-        .then(registration => {
+        .then(() => {
           console.log('service worker registration successful');
         })
         .catch(err => {
